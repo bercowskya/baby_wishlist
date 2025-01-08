@@ -33,8 +33,8 @@ This starts the proxy on port 3000 (or whichever port you have configured).
    ```bash
    python -m http.server 8080
    
-   - You can also use any other static server you prefer.
-   - This command will serve the current directory at http://localhost:8080.
+ - You can also use any other static server you prefer.
+ - This command will serve the current directory at http://localhost:8080.
 
 Open the webpage in your browser by visiting: [Link](http://localhost:8080/index.html)
 
