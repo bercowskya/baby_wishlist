@@ -671,7 +671,7 @@
   // PATCH con query param (arregla el "NOT_FOUND")
   async function updateRecord(recordId, fields) {
     // Construimos la URL con ?recordId=...
-    const url = `${API_BASE}/api/update-record?recordId=${recordId}`;
+    const url = `${API_BASE}/api/update-records?recordId=${recordId}`;
     const resp = await fetch(url, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
