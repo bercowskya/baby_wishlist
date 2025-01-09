@@ -192,7 +192,12 @@
     <p><strong>¡Hola familia y amigos!</strong></p>
     <p>
       En la lista de abajo verán cada producto con un enlace específico (si lo hay)  
-      o una breve descripción (si no es un link). Pueden comprarlo directamente en esa web  
+      o una breve descripción (si no es un link). 
+      <strong>Los que tienen link son exactamente los que queremos</strong>;  
+      los que no tienen nada escrito son de <em>libre elección</em>.
+    </p>
+    <p>
+      Pueden comprarlo directamente en esa web  
       y enviarlo a <em>Chamerstrasse 68, 6300 Zug, Suiza</em>,  
       a nombre de <strong>Joan Rue</strong> o <strong>Arianne Bercowsky</strong>.
     </p>
@@ -229,6 +234,7 @@
     <label for="catSelect">Categoría:</label>
     <select id="catSelect" onchange="handleFilterChange()"></select>
 
+    <!-- Botón de ordenar corregido -->
     <button id="sortBtn" onclick="toggleSort()">Ordenar: Estado</button>
 
     <input type="text" id="searchInput" placeholder="Buscar producto..." oninput="handleFilterChange()">
@@ -251,7 +257,7 @@
 </div>
 
 <script>
-  const API_BASE = '';
+  const API_BASE = '';  // Deja vacío si tu app está en la misma ruta /api
   const PAGE_SIZE = 10;
 
   let allRecords = [];
@@ -467,6 +473,7 @@
     }
   }
 
+  // Botón de orden
   function toggleSort() {
     if (sortMode === 'Estado') {
       sortMode = 'Precio';
@@ -661,9 +668,10 @@
     }
   }
 
-  // PATCH
+  // PATCH con query param (arregla el "NOT_FOUND")
   async function updateRecord(recordId, fields) {
-    const url = `${API_BASE}/api/update-record/${recordId}`;
+    // Construimos la URL con ?recordId=...
+    const url = `${API_BASE}/api/update-record?recordId=${recordId}`;
     const resp = await fetch(url, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
