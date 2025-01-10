@@ -192,7 +192,12 @@
     <p><strong>¡Hola familia y amigos!</strong></p>
     <p>
       En la lista de abajo verán cada producto con un enlace específico (si lo hay)  
-      o una breve descripción (si no es un link). Pueden comprarlo directamente en esa web  
+      o una breve descripción (si no es un link). 
+      <strong>Los que tienen link son exactamente los que queremos</strong>;  
+      los que no tienen nada escrito son de <em>libre elección</em>.
+    </p>
+    <p>
+      Pueden comprarlo directamente en esa web  
       y enviarlo a <em>Chamerstrasse 68, 6300 Zug, Suiza</em>,  
       a nombre de <strong>Joan Rue</strong> o <strong>Arianne Bercowsky</strong>.
     </p>
@@ -204,9 +209,17 @@
       parte de ese importe o el total.
     </p>
     <p>
-      También existe la opción de contribuir con dinero (euros o francos),  
-      indicando en el mensaje a qué artículo va destinado.  
-      Antes de comprar o aportar, hagan un “refresh” de la página  
+      También existe la opción de contribuir con dinero (euros o francos), indicando en el mensaje a qué artículo va destinado.
+    </p>
+    <div style="background-color: #FEECEC; border: 1px solid #F3B7B4; padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 0.95em;">
+      <strong>Beneficiario:</strong> Joan Rue Queralt<br>
+      <strong>IBAN:</strong> GB70 REVO 0099 7015 6001 99<br>
+      <strong>BIC / SWIFT:</strong> REVOGB21<br>
+      <strong>Banco:</strong> Revolut Ltd<br>
+      <strong>Dirección (del banco):</strong> 7 Westferry Circus, E14 4HD, London, Reino Unido
+    </div>
+    <p> 
+      Antes de comprar o aportar, actualicen la página  
       para asegurarse de que el producto sigue disponible,  
       pues varias personas pueden usar la lista en paralelo.
     </p>
@@ -221,6 +234,7 @@
     <label for="catSelect">Categoría:</label>
     <select id="catSelect" onchange="handleFilterChange()"></select>
 
+    <!-- Botón de ordenar corregido -->
     <button id="sortBtn" onclick="toggleSort()">Ordenar: Estado</button>
 
     <input type="text" id="searchInput" placeholder="Buscar producto..." oninput="handleFilterChange()">
@@ -243,7 +257,7 @@
 </div>
 
 <script>
-  const API_BASE = 'http://localhost:3000';
+  const API_BASE = '';  // Deja vacío si tu app está en la misma ruta /api
   const PAGE_SIZE = 10;
 
   let allRecords = [];
@@ -459,6 +473,7 @@
     }
   }
 
+  // Botón de orden
   function toggleSort() {
     if (sortMode === 'Estado') {
       sortMode = 'Precio';
@@ -653,9 +668,10 @@
     }
   }
 
-  // PATCH
+  // PATCH con query param (arregla el "NOT_FOUND")
   async function updateRecord(recordId, fields) {
-    const url = `${API_BASE}/api/update-record/${recordId}`;
+    // Construimos la URL con ?recordId=...
+    const url = `${API_BASE}/api/update-records?recordId=${recordId}`;
     const resp = await fetch(url, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
